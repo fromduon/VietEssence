@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+/*
+Template Name: About
+*/
+?>
+
 <?php get_header(); ?>
 
     <!-- About Start -->

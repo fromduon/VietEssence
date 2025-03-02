@@ -236,23 +236,55 @@ p {
     }
 }
 
-
-/*** Hero Header ***/
 .hero-header {
-    background: linear-gradient(rgba(20, 20, 31, 0.7), rgba(20, 20, 31, 0.7)), 
-    url(../img/hoian_bg.jpg);
-background-position: center center;
-background-repeat: no-repeat;
-background-size: cover;
-background-attachment: fixed; 
-height: 100vh; 
-display: flex;
-align-items: center;
-justify-content: center;
-color: white;
-font-size: 2rem;
-    
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
+
+.hero-header .hero-video {
+            position: relative;
+            width: 100vw;
+            height: 150vh;
+            overflow: auto;
+}
+
+.hero-header .hero-image {
+    background: linear-gradient(rgba(20, 20, 31, 0.7), rgba(20, 20, 31, 0.7)), 
+                url(../img/hoian_bg.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Chỉ ẩn chữ trên index.php */
+.home .hero-header .hero-content {
+    display: none !important;
+}
+
+/* Fix lỗi chữ bị chồng lên nhau */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.vietessence-title, .hero-title {
+    position: relative;
+    z-index: 3;
+}
+
 
 
 .breadcrumb-item + .breadcrumb-item::before {
@@ -540,4 +572,20 @@ font-size: 2rem;
     margin-right: 0;
     padding-right: 0;
     border-right: none;
+}
+
+
+.container-fluid {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.hero-header {
+    overflow: hidden; /* Tránh lỗi hiển thị hình ảnh/video */
+    max-width: 100%;
+}
+
+.footer {
+    width: 100%;
+    overflow-x: hidden;
 }

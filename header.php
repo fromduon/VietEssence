@@ -74,7 +74,7 @@
     <!-- Navbar & Hero Start -->
     <div class="container-fluid position-relative p-0">
         <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
-            <a href="" class="navbar-brand p-0">
+            <a href="<?php echo home_url('/'); ?>" class="navbar-brand p-0">
                 <!-- <h1 class="text-primary m-0"><i class="fa fa-map-marker-alt me-3"></i>Tourist</h1> -->
                 <img src="<?php echo get_template_directory_uri(); ?>/img/logo_no_bg.png" alt="Logo">
             </a>
@@ -83,35 +83,43 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
-                    <a href="index.php" class="nav-item nav-link active">Home</a>
-                    <a href="about.php" class="nav-item nav-link">About</a>
-                    <a href="service.php" class="nav-item nav-link">Services</a>
+                <a href="<?php echo home_url(); ?>" class="nav-item nav-link">Home</a>
+                    <a href="<?php echo get_permalink(get_page_by_path('workshop')->ID); ?>" class="nav-item nav-link">Workshops</a>
+                    <a href="<?php echo get_permalink(get_page_by_path('about')->ID); ?>" class="nav-item nav-link">About</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu m-0">
-                            <a href="destination.php" class="dropdown-item">Destination</a>
-                            <a href="booking.php" class="dropdown-item">Booking</a>
-                            <a href="team.php" class="dropdown-item">Travel Guides</a>
-                            <a href="testimonial.php" class="dropdown-item">Testimonial</a>
+                            <a href="<?php echo get_permalink(get_page_by_path('destination')->ID); ?>" class="dropdown-item">Destination</a>
+                            <a href="<?php echo get_permalink(get_page_by_path('booking')->ID); ?>" class="dropdown-item">Booking</a>
+                            <a href="<?php echo get_permalink(get_page_by_path('team')->ID); ?>" class="dropdown-item">Travel Guides</a>
+                            <a href="<?php echo get_permalink(get_page_by_path('testimonial')->ID); ?>" class="dropdown-item">Testimonial</a>
                             <a href="404.php" class="dropdown-item">404 Page</a>
                         </div>
                     </div>
-                    <a href="contact.php" class="nav-item nav-link">Contact</a>
+                    <a href="<?php echo get_permalink(get_page_by_path('contact')->ID); ?>" class="nav-item nav-link">Contact</a>
                 </div>
-                <a href="" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
+                <a href="<?php echo wp_login_url(); ?>" class="btn btn-primary rounded-pill py-2 px-4">Login</a>
             </div>
         </nav>
 
-        <div class="container-fluid hero-header">
-            <div class="text-center">
-                <h1 class="display-2 text-white fw-bold vietessence-title">VietEssence</h1>
-                <h1 class="display-3 text-white mb-3 hero-title">
-                    Vietnam's Story, Your Adventure
-                        </h1>
-                        <!-- <p class="fs-4 text-white mb-4 animated slideInDown">Welcome To VietEssence</p> -->
-                    </div>
-                </div>
-            </div>
+        <div class="hero-header">
+    <?php if (is_front_page() || is_home()) : ?>
+        <div class="hero-video-container">
+            <iframe class="hero-video" src="https://player.vimeo.com/video/1059695966?autoplay=1&loop=1&title=0&sidedock=0&controls=0&background=1"
+                frameborder="0" allow="autoplay; picture-in-picture"
+                allowfullscreen></iframe>
         </div>
+    <?php else : ?>
+        <div class="hero-image"></div>
+        <div class="hero-content">
+            <h1 class="display-2 text-white fw-bold vietessence-title">VietEssence</h1>
+            <h1 class="display-3 text-white mb-3 hero-title">Vietnam's Story, Your Adventure</h1>
+        </div>
+    <?php endif; ?>
+</div>
+
+
+
+
     </div>
     <!-- Navbar & Hero End -->
