@@ -50,189 +50,78 @@ Template Name: Home
     </div>
     <!-- About End -->
 
-    <!-- Package Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="text-center wow fadeInUp" data-wow-delay="0.6s">
-                <h6 class="section-title bg-white text-center text-primary px-3">Services</h6>
-                <h1 class="mb-5">Activites</h1>
-            </div>
-            <div class="row g-4 justify-content-center">
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="package-item position-relative">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="<?php echo get_template_directory_uri(); ?>/img/package-1.jpg" alt="">
-                            <div class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2">15% OFF</div>
-                            <!-- <div class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2">30% OFF</div> -->
-                        </div>
-                        <div class="d-flex border-bottom">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>Da Nang</small>
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>2 days</small>
-                            <!-- <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>2 Person</small> -->
-                        </div>
-                        <div class="text-center p-4">
-                            <h3 class="mb-0">Pottery Making</h3>
-                            <!-- <div class="mb-3">
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                            </div> -->
-                            <p>Master the ancient craft of Vietnamese pottery and create your own ceramic piece.</p>
-                            <div class="d-flex justify-content-center mb-2">
-                                <a href="#" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
-                                <a href="#" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
+   <!-- Activities (Latest Workshops) Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.6s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Workshops</h6>
+            <h1 class="mb-5">Discover Our Latest Workshops</h1>
+        </div>
+
+        <div class="row g-4">
+            <?php
+            $args = array(
+                'post_type'      => 'post',
+                'category_name'  => 'workshop',
+                'posts_per_page' => 6 // Hiển thị 6 workshop mới nhất
+            );
+            $query = new WP_Query($args);
+
+            if ($query->have_posts()) :
+                $delay = 0.1; // Tạo hiệu ứng delay dần cho từng ô
+                while ($query->have_posts()) : $query->the_post();
+
+                    // Custom Fields
+                    $description = get_post_meta(get_the_ID(), 'description', true) ?: 'No description available.';
+                    $discount = get_post_meta(get_the_ID(), 'discount', true) ?: 'No discount';
+                    $location = get_post_meta(get_the_ID(), 'location', true) ?: 'Unknown Location';
+                    $duration = get_post_meta(get_the_ID(), 'duration', true) ?: 'Unknown Duration';
+
+                    // Thumbnail Handling
+                    $thumbnail_id = get_post_meta(get_the_ID(), 'thumbnail', true);
+                    $thumbnail_url = wp_get_attachment_image_url($thumbnail_id, 'medium') ?: get_the_post_thumbnail_url(get_the_ID(), 'medium');
+                    $thumbnail_url = $thumbnail_url ?: get_template_directory_uri() . '/img/default-image.jpg';
+                    ?>
+
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="<?php echo $delay; ?>s">
+                        <div class="card shadow-sm border-0 h-100">
+                            <div class="position-relative">
+                                <img src="<?php echo esc_url($thumbnail_url); ?>" class="card-img-top img-fluid workshop-image" alt="<?php the_title(); ?>">
+                                <span class="badge bg-danger position-absolute top-0 start-0 m-2 px-3 py-1">
+                                    <?php echo esc_html($discount); ?>
+                                </span>
+                            </div>
+                            <div class="text-center p-4">
+                                <h4 class="mb-0"><?php the_title(); ?></h4>
+                                <p class="text-muted"><?php echo esc_html($description); ?></p>
+                            </div>
+                            <div class="d-flex justify-content-around py-3 border-top">
+                                <span><i class="fa fa-map-marker-alt text-primary me-2"></i><?php echo esc_html($location); ?></span>
+                                <span><i class="fa fa-clock text-primary me-2"></i><?php echo esc_html($duration); ?></span>
+                            </div>
+                            <div class="text-center pb-3">
+                                <a href="<?php the_permalink(); ?>" class="btn btn-sm btn-primary px-3 border-end">
+                                    Details
+                                </a>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="package-item position-relative">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="<?php echo get_template_directory_uri(); ?>/img/package-2.jpg" alt="">
-                            <div class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2">20% OFF</div>
-                        </div>
-                        <div class="d-flex border-bottom">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>Hoi An</small>
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>1 days</small>
-                            <!-- <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>2 Person</small> -->
-                        </div>
-                        <div class="text-center p-4">
-                            <h3 class="mb-0">Lantern Making</h3>
-                             <!-- <div class="mb-3">
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                            </div> -->
-                            <p> Craft a traditional Vietnamese lantern to capture the essence of Hội An.</p>
-                            <div class="d-flex justify-content-center mb-2">
-                                <a href="#" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
-                                <a href="#" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="package-item position-relative">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="<?php echo get_template_directory_uri(); ?>/img/package-3.jpg" alt="">
-                            <div class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2">25% OFF</div>
-                        </div>
-                        <div class="d-flex border-bottom">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>Da Nang</small>
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>1 day</small>
-                            <!-- <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>2 Person</small> -->
-                        </div>
-                        <div class="text-center p-4">
-                            <h3 class="mb-0">Silk Painting</h3>
-                             <!-- <div class="mb-3">
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                            </div> -->
-                            <p>Paint on silk using age-old techniques in a creative session.</p>
-                            <div class="d-flex justify-content-center mb-2">
-                                <a href="#" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
-                                <a href="#" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <div class="package-item position-relative">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="<?php echo get_template_directory_uri(); ?>/img/package-4.jpg" alt="">
-                            <div class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2">35% OFF</div>
-                        </div>
-                        <div class="d-flex border-bottom">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>Da Nang</small>
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>3 days</small>
-                            <!-- <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>2 Person</small> -->
-                        </div>
-                        <div class="text-center p-4">
-                            <h3 class="mb-0">Cooking Class</h3>
-                             <!-- <div class="mb-3">
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                            </div> -->
-                            <p>Cook and taste traditional Đà Nẵng dishes (Bánh xèo, Bún chả cá...) with expert chefs.</p>
-                            <div class="d-flex justify-content-center mb-2">
-                                <a href="#" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
-                                <a href="#" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.9s">
-                    <div class="package-item position-relative">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="<?php echo get_template_directory_uri(); ?>/img/package-5.jpg" alt="">
-                            <div class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2">25% OFF</div>
-                        </div>
-                        <div class="d-flex border-bottom">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>Hoi An</small>
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>1 day</small>
-                            <!-- <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>2 Person</small> -->
-                        </div>
-                        <div class="text-center p-4">
-                            <h3 class="mb-0">Bamboo Crafting</h3>
-                             <!-- <div class="mb-3">
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                            </div> -->
-                            <p>Create eco-friendly items in our hands-on bamboo crafting course.</p>
-                            <div class="d-flex justify-content-center mb-2">
-                                <a href="#" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
-                                <a href="#" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="1.2s">
-                    <div class="package-item position-relative">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="<?php echo get_template_directory_uri(); ?>/img/package-6.jpg" alt="">
-                            <div class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2">30% OFF</div>
-                        </div>
-                        <div class="d-flex border-bottom">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>Hoi An</small>
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>1 day</small>
-                            <!-- <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>2 Person</small> -->
-                        </div>
-                        <div class="text-center p-4">
-                            <h3 class="mb-0">Fabric Dyeing</h3>
-                             <!-- <div class="mb-3">
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                            </div> -->
-                            <p>Experience the art of fabric dyeing using natural, local dyes.</p>
-                            <div class="d-flex justify-content-center mb-2">
-                                <a href="#" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
-                                <a href="#" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+                <?php 
+                $delay += 0.1; // Tăng hiệu ứng delay cho từng workshop tiếp theo
+                endwhile;
+                wp_reset_postdata();
+            else :
+                echo "<p class='text-center text-muted'>No workshops available at the moment. Check back soon!</p>";
+            endif;
+            ?>
+        </div>
+        <div class="text-center mt-4">
+            <a href="<?php echo site_url('/workshop'); ?>" class="btn btn-primary px-5 py-3 rounded-pill">View All Workshops</a>
         </div>
     </div>
-    <!-- Package End -->
-
-
+</div>
+<!-- Activities (Latest Workshops) End -->
 
     <!-- Process Start -->
     <div class="container-xxl py-5">

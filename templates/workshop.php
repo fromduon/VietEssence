@@ -52,8 +52,8 @@ Template Name: Workshop
                                 <?php echo esc_html($discount); ?>
                             </span>
                         </div>
-                        <div class="card-body text-center">
-                            <h4 class="card-title text-dark fw-bold"><?php the_title(); ?></h4>
+                        <div class="text-center p-4">
+                            <h4 class="mb-0"><?php the_title(); ?></h4>
                             <p class="text-muted"><?php echo esc_html($description); ?></p>
                         </div>
                         <div class="d-flex justify-content-around py-3 border-top">
@@ -61,8 +61,8 @@ Template Name: Workshop
                             <span><i class="fa fa-clock text-primary me-2"></i><?php echo esc_html($duration); ?></span>
                         </div>
                         <div class="text-center pb-3">
-                            <a href="<?php the_permalink(); ?>" class="btn btn-success px-4">
-                                More Details
+                            <a href="<?php the_permalink(); ?>" class="btn btn-sm btn-primary px-3 border-end">
+                                Details
                             </a>
                         </div>
                     </div>

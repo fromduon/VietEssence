@@ -7,7 +7,7 @@
             <div class="text-muted small">
                 <p class="fw-bold">AUTHOR:</p>
                 <p><?php the_author(); ?></p>
-                
+
                 <p class="fw-bold">PUBLISHED:</p>
                 <p><?php echo get_the_date(); ?></p>
 
@@ -35,10 +35,9 @@
                 <h1 class="fw-bold"><?php the_title(); ?></h1>
                 <p class="text-muted">Takes place on: <?php echo esc_html(get_post_meta(get_the_ID(), 'date', true)); ?></p>
 
-                <!-- Nội dung chính -->
+                <!-- Nội dung chính (THAY THẾ OVERVIEW & DETAILED) -->
                 <div class="content">
-                    <p class="lead"><?php echo esc_html(get_post_meta(get_the_ID(), 'overview', true)); ?></p>
-                    <p><?php echo nl2br(esc_html(get_post_meta(get_the_ID(), 'detailed', true))); ?></p>
+                    <?php the_content(); ?>
                 </div>
 
                 <!-- Thông tin Workshop -->
@@ -104,7 +103,6 @@
     </div>
 </div>
 
-
 <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
     <div class="container">
         <div class="booking p-5">
@@ -147,6 +145,5 @@
         </div>
     </div>
 </div>
-
 
 <?php get_footer(); ?>
