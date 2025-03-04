@@ -9,46 +9,25 @@ Template Name: Home
 
 <?php get_header(); ?>
 
-    <!-- About Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-6 wow fadeInUp about-content" data-wow-delay="0.1s" style="min-height: 400px;">
-                    <div class="position-relative h-100">
-                        <img class="img-fluid position-absolute w-100 h-100" src="<?php echo get_template_directory_uri(); ?>/img/about.jpg" alt="" style="object-fit: cover;">
-                    </div>
+<!-- About Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s" style="min-height: 400px;">
+                <div class="position-relative h-100">
+                    <img class="img-fluid position-absolute w-100 h-100" src="<?php echo get_template_directory_uri(); ?>/img/about.jpg" alt="" style="object-fit: cover;">
                 </div>
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.2s">
-                    <h6 class="section-title bg-white text-start text-primary pe-3">About Us</h6>
-                    <h1 class="mb-4">Welcome To <span class="text-primary">VietEssence</span></h1>
-                    <p class="mb-4 large-text">At VietEssence, we connect international travelers with authentic Vietnamese cultural experiences. Our platform offers weekly updates on workshops and activities in traditional craft villages, primarily in Da Nang and Hoi An.</p>
-                    <p class="mb-4 large-text">Discover the art of Vietnamese craftsmanship through hands-on workshops, interact with local artisans, and immerse yourself in the heritage of Vietnam. Whether you're looking to explore pottery, weaving, or bamboo crafting, we provide you with unique opportunities to connect with the rich traditions of this beautiful country.</p>
-                    <!-- <div class="row gy-2 gx-4 mb-4">
-                        <div class="col-sm-6">
-                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>First Class Flights</p>
-                        </div>
-                        <div class="col-sm-6">
-                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Handpicked Hotels</p>
-                        </div>
-                        <div class="col-sm-6">
-                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>5 Star Accommodations</p>
-                        </div>
-                        <div class="col-sm-6">
-                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Latest Model Vehicles</p>
-                        </div>
-                        <div class="col-sm-6">
-                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>150 Premium City Tours</p>
-                        </div>
-                        <div class="col-sm-6">
-                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>24/7 Service</p>
-                        </div>
-                    </div>
-                    <a class="btn btn-primary py-3 px-5 mt-2" href="">Read More</a> -->
-                </div>
+            </div>
+            <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.4s">
+                <h6 class="section-title bg-white text-start text-primary pe-3">About Us</h6>
+                <h1 class="mb-4">Welcome To <span class="text-primary">VietEssence</span></h1>
+                <p class="mb-4 large-text">At VietEssence, we connect international travelers with authentic Vietnamese cultural experiences. Our platform offers weekly updates on workshops and activities in traditional craft villages, primarily in Da Nang and Hoi An.</p>
+                <p class="mb-4 large-text">Discover the art of Vietnamese craftsmanship through hands-on workshops, interact with local artisans, and immerse yourself in the heritage of Vietnam. Whether you're looking to explore pottery, weaving, or bamboo crafting, we provide you with unique opportunities to connect with the rich traditions of this beautiful country.</p>
             </div>
         </div>
     </div>
-    <!-- About End -->
+</div>
+<!-- About End -->
 
    <!-- Activities (Latest Workshops) Start -->
 <div class="container-xxl py-5">
@@ -63,12 +42,12 @@ Template Name: Home
             $args = array(
                 'post_type'      => 'post',
                 'category_name'  => 'workshop',
-                'posts_per_page' => 6 // Hiển thị 6 workshop mới nhất
+                'posts_per_page' => 6 // hiển thị 6 workshop mới nhất
             );
             $query = new WP_Query($args);
 
             if ($query->have_posts()) :
-                $delay = 0.1; // Tạo hiệu ứng delay dần cho từng ô
+                $delay = 0.1;
                 while ($query->have_posts()) : $query->the_post();
 
                     // Custom Fields
@@ -108,7 +87,7 @@ Template Name: Home
                     </div>
 
                 <?php 
-                $delay += 0.1; // Tăng hiệu ứng delay cho từng workshop tiếp theo
+                $delay += 0.1;
                 endwhile;
                 wp_reset_postdata();
             else :
@@ -116,7 +95,7 @@ Template Name: Home
             endif;
             ?>
         </div>
-        <div class="text-center mt-4">
+        <div class="text-center mt-4 wow fadeInUp" data-wow-delay="0.2s">
             <a href="<?php echo site_url('/workshop'); ?>" class="btn btn-primary px-5 py-3 rounded-pill">View All Workshops</a>
         </div>
     </div>
@@ -171,109 +150,45 @@ Template Name: Home
 
 
     
-    <!-- Team Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="text-center wow fadeInUp" data-wow-delay="0.5s">
-                <h6 class="section-title bg-white text-center text-primary px-3">Our Team</h6>
-                <h1 class="mb-5">Meet Our Team</h1>
-            </div>
-            <div class="row g-4">
-                <div class="col-lg col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+<!-- Team Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.2s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Our Team</h6>
+            <h1 class="mb-5">Meet Our Team</h1>
+        </div>
+        <div class="row g-4">
+            <?php
+            $team_members = [
+                ["img/ngoc.jpg", "Yến Ngọc", "CEO - Team Leader"],
+                ["img/lan.jpg", "Ngọc Lan", "Finance Director"],
+                ["img/hai.jpg", "Huỳnh Hải", "Marketing Director"],
+                ["img/duong.jpg", "Ánh Dương", "Tech. Director"],
+                ["img/anh.jpg", "Minh Anh", "Tech. Director"],
+                ["img/nhi.jpg", "Yến Nhi", "HR Officer"],
+            ];
+            $delay = 0.1;
+            foreach ($team_members as $member) : ?>
+                <div class="col-lg col-md-6 wow zoomIn" data-wow-delay="<?php echo $delay; ?>s">
                     <div class="team-item">
                         <div class="overflow-hidden">
-                            <img class="img-fluid" src="<?php echo get_template_directory_uri(); ?>/img/ngoc.jpg" alt="">
+                            <img class="img-fluid" src="<?php echo get_template_directory_uri(); ?>/<?php echo $member[0]; ?>" alt="">
                         </div>
                         <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square mx-1" href="#"><i class="fab fa-instagram"></i></a>
                         </div>
                         <div class="text-center p-4">
-                            <h5 class="mb-0">Yến Ngọc</h5>
-                            <small>CEO - Team Leader</small>
+                            <h5 class="mb-0"><?php echo $member[1]; ?></h5>
+                            <small><?php echo $member[2]; ?></small>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg col-md-6 wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="team-item">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="<?php echo get_template_directory_uri(); ?>/img/lan.jpg" alt="">
-                        </div>
-                        <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                        </div>
-                        <div class="text-center p-4">
-                            <h5 class="mb-0">Ngọc Lan</h5>
-                            <small>Finance Director</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="team-item">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="<?php echo get_template_directory_uri(); ?>/img/hai.jpg" alt="">
-                        </div>
-                        <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                        </div>
-                        <div class="text-center p-4">
-                            <h5 class="mb-0">Huỳnh Hải</h5>
-                            <small>Marketing Director</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg col-md-6 wow fadeInUp" data-wow-delay="0.4s">
-                    <div class="team-item">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="<?php echo get_template_directory_uri(); ?>/img/duong.jpg" alt="">
-                        </div>
-                        <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                        </div>
-                        <div class="text-center p-4">
-                            <h5 class="mb-0">Ánh Dương</h5>
-                            <small>Tech. Director</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="team-item">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="<?php echo get_template_directory_uri(); ?>/img/anh.jpg" alt="">
-                        </div>
-                        <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                        </div>
-                        <div class="text-center p-4">
-                            <h5 class="mb-0">Minh Anh</h5>
-                            <small>Tech. Director</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg col-md-6 wow fadeInUp" data-wow-delay="0.6s">
-                    <div class="team-item">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="<?php echo get_template_directory_uri(); ?>/img/nhi.jpg" alt="">
-                        </div>
-                        <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                        </div>
-                        <div class="text-center p-4">
-                            <h5 class="mb-0">Yến Nhi</h5>
-                            <small>HR Officer</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php $delay += 0.1; endforeach; ?>
         </div>
     </div>
-    
-    <!-- Team End -->
+</div>
+<!-- Team End -->
 
 
     <!-- Testimonial Start -->
@@ -298,7 +213,7 @@ Template Name: Home
                 </div>
                 <div class="testimonial-item bg-white text-center border p-4">
                     <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="<?php echo get_template_directory_uri(); ?>/img/testimonial-3.jpg" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">Lee Min Dien</h5>
+                    <h5 class="mb-0">Bao Dien</h5>
                     <p>Rome, Italy</p>
                     <p class="mt-2 mb-0">"I loved the weaving workshop I attended through VietEssence. The artisans were welcoming and so skilled. It was a fantastic opportunity to learn about Vietnamese heritage hands-on. Highly recommended for anyone visiting Vietnam!"</p>
                 </div>

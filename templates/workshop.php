@@ -10,8 +10,9 @@ Template Name: Workshop
 <?php get_header(); ?>
 
 <div class="container py-5">
-    <div class="text-center mb-5">
-        <h1 class="fw-bold text-primary">Workshop List</h1>
+    <!-- Phần tiêu đề -->
+    <div class="text-center mb-5 wow fadeInDown" data-wow-duration="1s">
+        <h1 class="fw-bold text-primary">Discover New Workshops</h1>
         <p class="text-muted fst-italic" style="font-size: 18px;">
             (Updated: <?php echo esc_html(date('l, d/m/Y', strtotime('Monday this week'))); ?>)
         </p>
@@ -20,6 +21,7 @@ Template Name: Workshop
         </p>
     </div>
 
+    <!-- Danh sách Workshop -->
     <div class="row g-4">
         <?php
         $args = array(
@@ -30,6 +32,7 @@ Template Name: Workshop
         $query = new WP_Query($args);
 
         if ($query->have_posts()) :
+            $delay = 0.2; // Độ trễ tăng dần giữa các workshop
             while ($query->have_posts()) : $query->the_post();
 
                 // Custom Fields
@@ -44,7 +47,8 @@ Template Name: Workshop
                 $thumbnail_url = $thumbnail_url ?: get_template_directory_uri() . '/img/default-image.jpg';
                 ?>
                 
-                <div class="col-lg-4 col-md-6">
+                <!-- Card Workshop với hiệu ứng fadeInUp -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="<?php echo $delay; ?>s">
                     <div class="card shadow-sm border-0 h-100">
                         <div class="position-relative">
                             <img src="<?php echo esc_url($thumbnail_url); ?>" class="card-img-top img-fluid workshop-image" alt="<?php the_title(); ?>">
@@ -68,31 +72,15 @@ Template Name: Workshop
                     </div>
                 </div>
 
-            <?php endwhile;
+            <?php 
+                $delay += 0.2; // Tăng độ trễ cho hiệu ứng tiếp theo
+            endwhile;
             wp_reset_postdata();
         else :
-            echo "<p class='text-center text-muted'>Currently, there are no available workshops. Please check back later!</p>";
+            echo "<p class='text-center text-muted wow fadeIn' data-wow-duration='1s'>Currently, there are no available workshops. Please check back later!</p>";
         endif;
         ?>
     </div>
 </div>
-
-<style>
-    .workshop-image {
-        height: 220px;
-        object-fit: cover;
-        transition: transform 0.3s ease-in-out;
-    }
-    .workshop-image:hover {
-        transform: scale(1.05);
-    }
-    .card {
-        transition: all 0.3s ease-in-out;
-    }
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    }
-</style>
 
 <?php get_footer(); ?>

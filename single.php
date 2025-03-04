@@ -3,11 +3,8 @@
 <div class="container mt-4">
     <div class="row">
         <!-- Cột trái: Tác giả & Chia sẻ -->
-        <aside class="col-lg-2 d-none d-lg-block">
-            <div class="text-muted small">
-                <p class="fw-bold">AUTHOR:</p>
-                <p><?php the_author(); ?></p>
-
+        <aside class="col-lg-2 d-none d-lg-block wow fadeInLeft" data-wow-delay="0.2s">
+            <div class="text-muted">
                 <p class="fw-bold">PUBLISHED:</p>
                 <p><?php echo get_the_date(); ?></p>
 
@@ -29,19 +26,28 @@
                     $thumbnail_url = get_template_directory_uri() . '/img/default-image.jpg';
                 }
                 ?>
-                <img src="<?php echo esc_url($thumbnail_url); ?>" alt="<?php the_title(); ?>" class="img-fluid rounded shadow-lg mb-4">
+                <img src="<?php echo esc_url($thumbnail_url); ?>" alt="<?php the_title(); ?>" class="img-fluid rounded shadow-lg mb-4 wow fadeInUp" data-wow-delay="0.3s">
 
                 <!-- Tiêu đề -->
-                <h1 class="fw-bold"><?php the_title(); ?></h1>
-                <p class="text-muted">Takes place on: <?php echo esc_html(get_post_meta(get_the_ID(), 'date', true)); ?></p>
+                <h1 class="fw-bold wow fadeInLeft" data-wow-delay="0.4s"><?php the_title(); ?></h1>
+                <?php
+$date_raw = get_post_meta(get_the_ID(), 'date', true);
+if (!empty($date_raw) && preg_match('/^\d{8}$/', $date_raw)) {
+    $formatted_date = DateTime::createFromFormat('Ymd', $date_raw)->format('F j, Y');
+} else {
+    $formatted_date = 'Unknown date';
+}
+?>
+<p class="text-muted wow fadeInLeft" data-wow-delay="0.5s">Takes place on: <?php echo esc_html($formatted_date); ?></p>
 
-                <!-- Nội dung chính (THAY THẾ OVERVIEW & DETAILED) -->
-                <div class="content">
+
+                <!-- Nội dung chính -->
+                <div class="content wow fadeInUp" data-wow-delay="0.6s">
                     <?php the_content(); ?>
                 </div>
 
                 <!-- Thông tin Workshop -->
-                <div class="border rounded p-4 bg-light mt-4 shadow-sm">
+                <div class="border rounded p-4 bg-light mt-4 shadow-sm wow fadeInRight" data-wow-delay="0.7s">
                     <h4 class="fw-bold"><i class="fas fa-info-circle"></i> Workshop Details</h4>
                     <p><strong>📍 Location:</strong> <?php echo esc_html(get_post_meta(get_the_ID(), 'location', true)); ?></p>
                     <p><strong>⏳ Duration:</strong> <?php echo esc_html(get_post_meta(get_the_ID(), 'duration', true)); ?></p>
@@ -49,7 +55,7 @@
                 </div>
 
                 <!-- Điều hướng bài viết -->
-                <div class="d-flex justify-content-between mt-5">
+                <div class="d-flex justify-content-between mt-5 wow fadeInUp" data-wow-delay="0.8s">
                     <?php previous_post_link('<strong>⬅ %link</strong>', 'Previous Workshop'); ?>
                     <?php next_post_link('<strong>%link ➡</strong>', 'Next Workshop'); ?>
                 </div>
@@ -58,26 +64,23 @@
 
         <!-- Sidebar phải -->
         <aside class="col-lg-3">
-            <!-- Quảng cáo -->
-            <div class="bg-light p-4 rounded shadow-sm mb-4">
-                <h4 class="fw-bold">BRAND STUDIO</h4>
-                <p>2019 Survey Report: The Case for an Employee Advocacy Program</p>
-                <a href="#" class="btn btn-primary btn-sm">Download</a>
+            <div class="bg-light p-4 rounded shadow-sm mb-4 wow fadeIn" data-wow-delay="0.5s">
+                <h4 class="fw-bold">MEET THE ARTISANS</h4>
+                <p>Discover the talented craftsmen behind our workshops and learn about their inspiring stories.</p>
+                <a href="https://www.victoriahotels.asia/vi/tin-tuc/nhung-ban-tay-nghe-nhan-cua-hoi-an/" class="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer">Click here</a>
             </div>
 
-            <!-- Newsletter -->
-            <div class="bg-white p-4 rounded shadow-sm mb-4">
-                <h4 class="fw-bold">GET THE NEWSLETTER</h4>
-                <p>Subscribe to get the latest updates.</p>
+            <div class="bg-white p-4 rounded shadow-sm mb-4 wow fadeIn" data-wow-delay="0.6s">
+                <h4 class="fw-bold">JOIN OUR CREATIVE COMMUNITY</h4>
+                <p>Receive insights, tips, and early access to unique Vietnamese craft workshops!</p>
                 <form>
                     <input type="email" class="form-control mb-2" placeholder="Enter your email">
                     <button type="submit" class="btn btn-primary w-100">Sign up</button>
                 </form>
             </div>
 
-            <!-- Bài viết phổ biến -->
-            <div class="bg-white p-4 rounded shadow-sm">
-                <h4 class="fw-bold">MOST POPULAR</h4>
+            <div class="bg-white p-4 rounded shadow-sm wow fadeIn" data-wow-delay="0.7s">
+                <h4 class="fw-bold">POPULAR WORKSHOPS</h4>
                 <ul class="list-unstyled">
                     <?php
                     $popular_args = array(
@@ -92,8 +95,20 @@
                     ?>
                             <li class="mb-3 p-2 border-bottom">
                                 <a href="<?php the_permalink(); ?>" class="text-dark text-decoration-none d-flex align-items-center">
-                                    <img src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'thumbnail') ?: get_template_directory_uri() . '/img/default-thumbnail.jpg'; ?>" alt="<?php the_title(); ?>" class="rounded me-2" width="50">
-                                    <?php the_title(); ?>
+                                    <?php
+                                    $thumbnail_id = get_post_meta(get_the_ID(), 'thumbnail', true);
+                                    $thumbnail_url = wp_get_attachment_image_url($thumbnail_id, 'thumbnail');
+
+                                    if (!$thumbnail_url) {
+                                        $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
+                                    }
+
+                                    if (!$thumbnail_url) {
+                                        $thumbnail_url = get_template_directory_uri() . '/img/default-thumbnail.jpg';
+                                    }
+                                    ?>
+                                    <img src="<?php echo esc_url($thumbnail_url); ?>" alt="<?php the_title(); ?>" class="rounded me-2" width="50">
+                                    <span class="workshop-title"><?php the_title(); ?></span>
                                 </a>
                             </li>
                     <?php endwhile; wp_reset_postdata(); endif; ?>
@@ -103,6 +118,7 @@
     </div>
 </div>
 
+<!-- Booking Section -->
 <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
     <div class="container">
         <div class="booking p-5">

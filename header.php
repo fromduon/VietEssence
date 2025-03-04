@@ -98,7 +98,6 @@
                     </div>
                     <a href="<?php echo get_permalink(get_page_by_path('contact')->ID); ?>" class="nav-item nav-link">Contact</a>
                 </div>
-                <a href="<?php echo wp_login_url(); ?>" class="btn btn-primary rounded-pill py-2 px-4">Login</a>
             </div>
         </nav>
 

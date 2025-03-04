@@ -1,4 +1,9 @@
-<!-    <!-- Footer Start -->
+<!-- WordPress Footer -->
+<?php wp_footer(); ?>
+</body>
+</html>
+
+<!-- Footer Start -->
     <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container py-5">
             <div class="row g-5">
@@ -39,10 +44,11 @@
                     </div>
                     <div class="col-md-6 text-center text-md-end">
                         <div class="footer-menu">
-                            <a href="">Home</a>
-                            <a href="">Cookies</a>
-                            <a href="">Help</a>
-                            <a href="">FQAs</a>
+                            <a href="<?php echo site_url(); ?>">Home</a>
+                            <a href="<?php echo site_url('/cookies'); ?>">Cookies</a>
+                            <a href="<?php echo site_url('/help'); ?>">Help</a>
+                            <a href="<?php echo site_url('/faqs'); ?>">FQAs</a>
+                            <a href="<?php echo wp_login_url(); ?>">Administrator</a>
                         </div>
                     </div>
                 </div>
@@ -53,90 +59,3 @@
 
 <!-- Back to Top -->
 <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-
-<!-- WordPress Footer -->
-<?php wp_footer(); ?>
-</body>
-</html>
-
-<!-- Booking Modal -->
-<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="bookingModalLabel">Book A Tour</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="bookingForm">
-                    <div class="mb-3">
-                        <label class="form-label">Your Name</label>
-                        <input type="text" class="form-control" id="userName" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Your Email</label>
-                        <input type="email" class="form-control" id="userEmail" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Workshop</label>
-                        <input type="text" class="form-control" id="workshopTitle" readonly>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Location</label>
-                        <input type="text" class="form-control" id="workshopLocation" readonly>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Date & Time</label>
-                        <input type="datetime-local" class="form-control" id="bookingDateTime" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Special Request</label>
-                        <textarea class="form-control" id="specialRequest" rows="3"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Book Now</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    // Khi nút "Book Now" được nhấn
-    document.querySelectorAll(".open-booking-modal").forEach(button => {
-        button.addEventListener("click", function () {
-            let workshopTitle = this.getAttribute("data-title");
-            document.getElementById("workshopTitle").value = workshopTitle;
-        });
-    });
-
-    // Xử lý khi submit form
-    document.getElementById("bookingForm").addEventListener("submit", function (event) {
-        event.preventDefault(); // Ngăn chặn tải lại trang
-
-        // Lấy dữ liệu từ form
-        let userName = document.getElementById("userName").value;
-        let userEmail = document.getElementById("userEmail").value;
-        let workshopTitle = document.getElementById("workshopTitle").value;
-        let bookingDateTime = document.getElementById("bookingDateTime").value;
-        let destination = document.getElementById("destination").value;
-        let specialRequest = document.getElementById("specialRequest").value;
-
-        // Gửi dữ liệu qua AJAX để xử lý
-        fetch("<?php echo admin_url('admin-ajax.php'); ?>", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams({
-                action: "submit_booking",
-                userName, userEmail, workshopTitle, bookingDateTime, destination, specialRequest
-            })
-        })
-        .then(response => response.text())
-        .then(data => {
-            alert("Booking successfully submitted!");
-            document.getElementById("bookingForm").reset(); // Reset form
-        })
-        .catch(error => console.error("Error:", error));
-    });
-});
-</script>
