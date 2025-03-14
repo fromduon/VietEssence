@@ -1,6 +1,6 @@
 <head>
     <meta charset="utf-8">
-    <title><?php bloginfo('name'); ?> | <?php bloginfo('description'); ?></title>
+    <title><?php wp_title('|', true, 'right'); ?> <?php bloginfo('name'); ?></title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     
     <!-- WordPress Styles -->

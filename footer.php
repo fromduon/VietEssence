@@ -13,9 +13,9 @@
                     <h4 class="text-white mb-3">Company</h4>
                     <a href="<?php echo get_permalink(get_page_by_path('about')->ID); ?>" class="btn btn-link" href="">About Us</a>
                     <a href="<?php echo get_permalink(get_page_by_path('contact')->ID); ?>" class="btn btn-link" href="">Contact Us</a>
-                    <a class="btn btn-link" href="">Privacy Policy</a>
-                    <a class="btn btn-link" href="">Terms & Condition</a>
-                    <a class="btn btn-link" href="">FAQs & Help</a>
+                    <a href="<?php echo get_permalink(get_page_by_path('policy')->ID); ?>" class="btn btn-link" href="">Privacy Policy</a>
+                    <a href="<?php echo get_permalink(get_page_by_path('terms')->ID); ?>" class="btn btn-link" href="">Terms & Condition</a>
+                    <a href="<?php echo get_permalink(get_page_by_path('faqs')->ID); ?>" class="btn btn-link" href="">FAQs & Help</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-white mb-3">Contact</h4>
@@ -44,7 +44,7 @@
                     <div class="col-md-6 text-center text-md-end">
                         <div class="footer-menu">
                             <a href="<?php echo site_url(); ?>">Home</a>
-                            <a href="<?php echo get_permalink(get_page_by_path('contact')->ID); ?>">Help</a>
+                            <a href="<?php echo get_permalink(get_page_by_path('faqs')->ID); ?>">FAQs & Help</a>
                             <a href="<?php echo wp_login_url(); ?>">Administrator</a>
                         </div>
                     </div>

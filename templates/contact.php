@@ -43,7 +43,7 @@ Template Name: Contact
                         </div>
                         <div class="ms-3">
                             <h5 class="text-primary">Email</h5>
-                            <p class="mb-0">contact.vietessence@gmail.com</p>
+                            <p class="mb-0">contact@vietessence.art</p>
                         </div>
                     </div>
                 </div>
