@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="utf-8">
     <title><?php bloginfo('name'); ?> | <?php bloginfo('description'); ?></title>
@@ -50,25 +48,42 @@
     <!-- Spinner End -->
 
 
-    <!-- Topbar Start -->
-    <div class="container-fluid bg-dark px-5 d-none d-lg-block topbar">
-        <div class="row gx-0">
-            <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
-                <div class="d-inline-flex align-items-center" style="height: 45px;">
-                    <small class="me-3 text-light"><i class="fa fa-map-marker-alt me-2"></i>FPT City, Hoa Hai Ward, Ngu Hanh Son Dist., Danang</small>
-                    <small class="me-3 text-light"><i class="fa fa-phone-alt me-2"></i>081 714 7773</small>
-                    <small class="text-light"><i class="fa fa-envelope-open me-2"></i>contact.vietessence@gmail.com</small>
-                </div>
+<!-- Topbar Start -->
+<div class="container-fluid bg-dark px-5 d-none d-lg-block topbar">
+    <div class="row gx-0">
+        <!-- Thông tin liên hệ -->
+        <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
+            <div class="d-inline-flex align-items-center" style="height: 45px;">
+                <small class="me-3 text-light"><i class="fa fa-map-marker-alt me-2"></i>FPT City, Hoa Hai Ward, Ngu Hanh Son Dist., Danang</small>
+                <small class="me-3 text-light"><i class="fa fa-phone-alt me-2"></i>081 714 7773</small>
+                <small class="text-light"><i class="fa fa-envelope-open me-2"></i>contact@vietessence.art</small>
             </div>
-            <div class="col-lg-4 text-center text-lg-end">
-                <div class="d-inline-flex align-items-center" style="height: 45px;">
-                    <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-facebook-f fw-normal"></i></a>
-                    <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-instagram fw-normal"></i></a>
-                </div>
+        </div>
+
+        <!-- Mạng xã hội + Toggle ngôn ngữ -->
+        <div class="col-lg-4 text-center text-lg-end">
+            <div class="d-inline-flex align-items-center" style="height: 45px;">
+                <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href="https://www.facebook.com/profile.php?id=61573773219376" target="_blank">
+                    <i class="fab fa-facebook-f fw-normal"></i>
+                </a>
+                <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href="https://www.instagram.com/vietessence.art" target="_blank">
+                    <i class="fab fa-instagram fw-normal"></i>
+                </a>
+
+                <!-- Toggle ngôn ngữ -->
+<div class="switch" id="language-switch">
+    <input id="language-toggle" class="check-toggle-round-flat" type="checkbox">
+    <label for="language-toggle"></label>
+    <img src="<?php echo get_template_directory_uri(); ?>/img/flag-en.png" alt="EN" class="flag-icon flag-en">
+    <img src="<?php echo get_template_directory_uri(); ?>/img/flag-vn.png" alt="VN" class="flag-icon flag-vn">
+</div>
+
             </div>
         </div>
     </div>
-    <!-- Topbar End -->
+</div>
+<!-- Topbar End -->
+
 
 
     <!-- Navbar & Hero Start -->
@@ -86,16 +101,6 @@
                 <a href="<?php echo home_url(); ?>" class="nav-item nav-link">Home</a>
                     <a href="<?php echo get_permalink(get_page_by_path('workshop')->ID); ?>" class="nav-item nav-link">Workshops</a>
                     <a href="<?php echo get_permalink(get_page_by_path('about')->ID); ?>" class="nav-item nav-link">About</a>
-                    <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu m-0">
-                            <a href="<?php echo get_permalink(get_page_by_path('destination')->ID); ?>" class="dropdown-item">Destination</a>
-                            <a href="<?php echo get_permalink(get_page_by_path('booking')->ID); ?>" class="dropdown-item">Booking</a>
-                            <a href="<?php echo get_permalink(get_page_by_path('team')->ID); ?>" class="dropdown-item">Travel Guides</a>
-                            <a href="<?php echo get_permalink(get_page_by_path('testimonial')->ID); ?>" class="dropdown-item">Testimonial</a>
-                            <a href="404.php" class="dropdown-item">404 Page</a>
-                        </div>
-                    </div>
                     <a href="<?php echo get_permalink(get_page_by_path('contact')->ID); ?>" class="nav-item nav-link">Contact</a>
                 </div>
             </div>
@@ -116,9 +121,6 @@
         </div>
     <?php endif; ?>
 </div>
-
-
-
 
     </div>
     <!-- Navbar & Hero End -->

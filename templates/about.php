@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <?php
 /*
 Template Name: About
@@ -45,9 +42,9 @@ Template Name: About
                 ["img/ngoc.jpg", "Yến Ngọc", "CEO - Team Leader"],
                 ["img/lan.jpg", "Ngọc Lan", "Finance Director"],
                 ["img/hai.jpg", "Huỳnh Hải", "Marketing Director"],
-                ["img/duong.jpg", "Ánh Dương", "Tech. Director"],
-                ["img/anh.jpg", "Minh Anh", "Tech. Director"],
-                ["img/nhi.jpg", "Yến Nhi", "HR Officer"],
+                ["img/duong.jpg", "Ánh Dương", "Technical Director"],
+                ["img/anh.jpg", "Minh Anh", "Technical Director"],
+                ["img/nhi.jpg", "Yến Nhi", "CSM Officer"],
             ];
             foreach ($team_members as $member) : ?>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -57,10 +54,6 @@ Template Name: About
                             <div class="team-overlay">
                                 <h5><?php echo $member[1]; ?></h5>
                                 <p><?php echo $member[2]; ?></p>
-                                <div class="social-links">
-                                    <a href="#" class="btn btn-sm"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#" class="btn btn-sm"><i class="fab fa-instagram"></i></a>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -72,18 +65,3 @@ Template Name: About
 <!-- Our Team End -->
 
 <?php get_footer(); ?>
-
-<!-- Back to Top -->
-<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-
-<!-- JavaScript Libraries -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="lib/wow/wow.min.js"></script>
-<script src="lib/easing/easing.min.js"></script>
-<script src="lib/waypoints/waypoints.min.js"></script>
-<script src="lib/owlcarousel/owl.carousel.min.js"></script>
-<script src="js/main.js"></script>
-
-</body>
-</html>

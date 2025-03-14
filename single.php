@@ -2,7 +2,6 @@
 
 <div class="container mt-4">
     <div class="row">
-        <!-- Cột trái: Tác giả & Chia sẻ -->
         <aside class="col-lg-2 d-none d-lg-block wow fadeInLeft" data-wow-delay="0.2s">
             <div class="text-muted">
                 <p class="fw-bold">PUBLISHED:</p>
@@ -18,7 +17,6 @@
         <!-- Nội dung bài viết -->
         <div class="col-lg-7">
             <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-                <!-- Ảnh đại diện lớn -->
                 <?php
                 $thumbnail_id = get_post_meta(get_the_ID(), 'thumbnail', true);
                 $thumbnail_url = wp_get_attachment_image_url($thumbnail_id, 'large') ?: get_the_post_thumbnail_url(get_the_ID(), 'large');
@@ -28,7 +26,6 @@
                 ?>
                 <img src="<?php echo esc_url($thumbnail_url); ?>" alt="<?php the_title(); ?>" class="img-fluid rounded shadow-lg mb-4 wow fadeInUp" data-wow-delay="0.3s">
 
-                <!-- Tiêu đề -->
                 <h1 class="fw-bold wow fadeInLeft" data-wow-delay="0.4s"><?php the_title(); ?></h1>
                 <?php
 $date_raw = get_post_meta(get_the_ID(), 'date', true);
@@ -41,7 +38,6 @@ if (!empty($date_raw) && preg_match('/^\d{8}$/', $date_raw)) {
 <p class="text-muted wow fadeInLeft" data-wow-delay="0.5s">Takes place on: <?php echo esc_html($formatted_date); ?></p>
 
 
-                <!-- Nội dung chính -->
                 <div class="content wow fadeInUp" data-wow-delay="0.6s">
                     <?php the_content(); ?>
                 </div>
@@ -54,7 +50,6 @@ if (!empty($date_raw) && preg_match('/^\d{8}$/', $date_raw)) {
                     <p><strong>💰 Discount:</strong> <?php echo esc_html(get_post_meta(get_the_ID(), 'discount', true)); ?></p>
                 </div>
 
-                <!-- Điều hướng bài viết -->
                 <div class="d-flex justify-content-between mt-5 wow fadeInUp" data-wow-delay="0.8s">
                     <?php previous_post_link('<strong>⬅ %link</strong>', 'Previous Workshop'); ?>
                     <?php next_post_link('<strong>%link ➡</strong>', 'Next Workshop'); ?>
@@ -64,21 +59,56 @@ if (!empty($date_raw) && preg_match('/^\d{8}$/', $date_raw)) {
 
         <!-- Sidebar phải -->
         <aside class="col-lg-3">
-            <div class="bg-light p-4 rounded shadow-sm mb-4 wow fadeIn" data-wow-delay="0.5s">
-                <h4 class="fw-bold">MEET THE ARTISANS</h4>
-                <p>Discover the talented craftsmen behind our workshops and learn about their inspiring stories.</p>
-                <a href="https://www.victoriahotels.asia/vi/tin-tuc/nhung-ban-tay-nghe-nhan-cua-hoi-an/" class="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer">Click here</a>
-            </div>
 
             <div class="bg-white p-4 rounded shadow-sm mb-4 wow fadeIn" data-wow-delay="0.6s">
                 <h4 class="fw-bold">JOIN OUR CREATIVE COMMUNITY</h4>
                 <p>Receive insights, tips, and early access to unique Vietnamese craft workshops!</p>
-                <form>
-                    <input type="email" class="form-control mb-2" placeholder="Enter your email">
-                    <button type="submit" class="btn btn-primary w-100">Sign up</button>
-                </form>
+                <a href="https://www.facebook.com/profile.php?id=61573773219376" target="_blank" class="btn btn-primary w-100">
+        <i class="fab fa-facebook-f me-2"></i> Join us on Facebook
+    </a>
             </div>
 
+            <div class="bg-white p-4 rounded shadow-sm mb-4 wow fadeIn" data-wow-delay="0.6s">
+        <h4 class="fw-bold text-primary"><i class="fas fa-gift me-2"></i> Workshop Souvenirs</h4>
+        <p class="text-muted">Take home a piece of your experience! Explore unique handmade souvenirs crafted during this workshop.</p>
+
+        <div class="row g-3">
+            <?php
+            $souvenir_fields = [
+                ['image' => 'souvenirimage1', 'name' => 'souvenirname1', 'price' => 'souvenirprice1'],
+                ['image' => 'souvenirimage2', 'name' => 'souvenirname2', 'price' => 'souvenirprice2'],
+                ['image' => 'souvenirimage3', 'name' => 'souvenirname3', 'price' => 'souvenirprice3'],
+            ];
+
+            $has_souvenir = false;
+
+            foreach ($souvenir_fields as $souvenir) :
+                $image_id = get_post_meta(get_the_ID(), $souvenir['image'], true);
+                $image_url = wp_get_attachment_image_url($image_id, 'medium');
+
+                $name = get_post_meta(get_the_ID(), $souvenir['name'], true);
+                $price = get_post_meta(get_the_ID(), $souvenir['price'], true);
+
+                if (!$image_url) continue; // Nếu không có ảnh, bỏ qua sản phẩm này
+                $has_souvenir = true;
+            ?>
+                <div class="col-12">
+                    <div class="border rounded p-3 shadow-sm text-center bg-light">
+                        <div class="position-relative overflow-hidden rounded mb-2">
+                            <img src="<?php echo esc_url($image_url); ?>" class="img-fluid rounded shadow-sm" alt="<?php echo esc_attr($name ?: 'Unnamed Product'); ?>">
+                        </div>
+                        <h5 class="fw-bold text-dark"><?php echo esc_html($name ?: 'Unnamed Product'); ?></h5>
+                        <p class="text-primary fw-semibold"><?php echo $price ? "$" . number_format((float)$price, 2) : "Contact for price"; ?></p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+
+            <?php if (!$has_souvenir) : ?>
+                <p class="text-muted">No souvenirs available for this workshop.</p>
+            <?php endif; ?>
+        </div>
+    </div>
+            
             <div class="bg-white p-4 rounded shadow-sm wow fadeIn" data-wow-delay="0.7s">
                 <h4 class="fw-bold">POPULAR WORKSHOPS</h4>
                 <ul class="list-unstyled">

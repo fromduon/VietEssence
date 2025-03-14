@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <?php
 /*
 Template Name: Home
@@ -8,6 +5,7 @@ Template Name: Home
 ?>
 
 <?php get_header(); ?>
+
 
 <!-- About Start -->
 <div class="container-xxl py-5">
@@ -21,8 +19,9 @@ Template Name: Home
             <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.4s">
                 <h6 class="section-title bg-white text-start text-primary pe-3">About Us</h6>
                 <h1 class="mb-4">Welcome To <span class="text-primary">VietEssence</span></h1>
-                <p class="mb-4 large-text">At VietEssence, we connect international travelers with authentic Vietnamese cultural experiences. Our platform offers weekly updates on workshops and activities in traditional craft villages, primarily in Da Nang and Hoi An.</p>
-                <p class="mb-4 large-text">Discover the art of Vietnamese craftsmanship through hands-on workshops, interact with local artisans, and immerse yourself in the heritage of Vietnam. Whether you're looking to explore pottery, weaving, or bamboo crafting, we provide you with unique opportunities to connect with the rich traditions of this beautiful country.</p>
+                <p class="mb-4 large-text">Discover the soul of Vietnam through Da Nang's craft villages. In Non Nuoc, young sculptors like Nguyen Van Long blend tradition with modern art, breathing new life into marble carving. In Cam Ne, artisans weave bamboo into sustainable designs, while Tuy Loan's silk weavers, like Tran Thi Hoa, reinvent textiles with natural dyes. Each village tells a story of resilience and innovation, where heritage meets the future.</p>
+                <p class="mb-4 large-text">Join us to explore, create, and connect with the essence of Vietnam.</p>
+                <p class="mb-4 large-text">VietEssence - Vietnam's Story, Your Adventure.</p>
             </div>
         </div>
     </div>
@@ -39,60 +38,61 @@ Template Name: Home
 
         <div class="row g-4">
             <?php
-            $args = array(
-                'post_type'      => 'post',
-                'category_name'  => 'workshop',
-                'posts_per_page' => 6 // hiển thị 6 workshop mới nhất
-            );
-            $query = new WP_Query($args);
+$args = array(
+    'post_type'      => 'post',
+    'category_name'  => 'workshop',
+    'posts_per_page' => 6 
+);
+$query = new WP_Query($args);
 
-            if ($query->have_posts()) :
-                $delay = 0.1;
-                while ($query->have_posts()) : $query->the_post();
+if ($query->have_posts()) :
+    $delay = 0.1;
+    while ($query->have_posts()) : $query->the_post();
 
-                    // Custom Fields
-                    $description = get_post_meta(get_the_ID(), 'description', true) ?: 'No description available.';
-                    $discount = get_post_meta(get_the_ID(), 'discount', true) ?: 'No discount';
-                    $location = get_post_meta(get_the_ID(), 'location', true) ?: 'Unknown Location';
-                    $duration = get_post_meta(get_the_ID(), 'duration', true) ?: 'Unknown Duration';
+        $description = get_post_meta(get_the_ID(), 'description', true) ?: 'No description available.';
+        $discount = get_post_meta(get_the_ID(), 'discount', true) ?: 'No discount';
+        $location = get_post_meta(get_the_ID(), 'location', true) ?: 'Unknown Location';
+        $duration = get_post_meta(get_the_ID(), 'duration', true) ?: 'Unknown Duration';
+        $price = get_post_meta(get_the_ID(), 'price', true) ?: 'Contact for price';
 
-                    // Thumbnail Handling
-                    $thumbnail_id = get_post_meta(get_the_ID(), 'thumbnail', true);
-                    $thumbnail_url = wp_get_attachment_image_url($thumbnail_id, 'medium') ?: get_the_post_thumbnail_url(get_the_ID(), 'medium');
-                    $thumbnail_url = $thumbnail_url ?: get_template_directory_uri() . '/img/default-image.jpg';
-                    ?>
+        $thumbnail_id = get_post_meta(get_the_ID(), 'thumbnail', true);
+        $thumbnail_url = wp_get_attachment_image_url($thumbnail_id, 'medium') ?: get_the_post_thumbnail_url(get_the_ID(), 'medium');
+        $thumbnail_url = $thumbnail_url ?: get_template_directory_uri() . '/img/default-image.jpg';
+        ?>
 
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="<?php echo $delay; ?>s">
-                        <div class="card shadow-sm border-0 h-100">
-                            <div class="position-relative">
-                                <img src="<?php echo esc_url($thumbnail_url); ?>" class="card-img-top img-fluid workshop-image" alt="<?php the_title(); ?>">
-                                <span class="badge bg-danger position-absolute top-0 start-0 m-2 px-3 py-1">
-                                    <?php echo esc_html($discount); ?>
-                                </span>
-                            </div>
-                            <div class="text-center p-4">
-                                <h4 class="mb-0"><?php the_title(); ?></h4>
-                                <p class="text-muted"><?php echo esc_html($description); ?></p>
-                            </div>
-                            <div class="d-flex justify-content-around py-3 border-top">
-                                <span><i class="fa fa-map-marker-alt text-primary me-2"></i><?php echo esc_html($location); ?></span>
-                                <span><i class="fa fa-clock text-primary me-2"></i><?php echo esc_html($duration); ?></span>
-                            </div>
-                            <div class="text-center pb-3">
-                                <a href="<?php the_permalink(); ?>" class="btn btn-sm btn-primary px-3 border-end">
-                                    Details
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="<?php echo $delay; ?>s">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="position-relative">
+                    <a href="<?php the_permalink(); ?>">
+                        <img src="<?php echo esc_url($thumbnail_url); ?>" class="card-img-top img-fluid workshop-image" alt="<?php the_title(); ?>">
+                    </a>
+                    <span class="badge bg-danger position-absolute top-0 start-0 m-2 px-3 py-1">
+                        <?php echo esc_html($discount); ?>
+                    </span>
+                </div>
+                <div class="text-center p-4">
+                    <a href="<?php the_permalink(); ?>" class="text-dark text-decoration-none">
+                        <h4 class="mb-0"><?php the_title(); ?></h4>
+                    </a>
+                    <p class="text-muted text-center m-0"><?php echo esc_html($description); ?></p>
+                </div>
+                <div class="d-flex justify-content-around py-3 border-top">
+                    <span><i class="fa fa-map-marker-alt text-primary me-2"></i><?php echo esc_html($location); ?></span>
+                    <span><i class="fa fa-clock text-primary me-2"></i><?php echo esc_html($duration); ?></span>
+                </div>
+                <div class="text-center pb-3">
+                <span class="fw-bold text-primary" style="font-size: 1.5rem;">$<?php echo number_format((float)$price, 2); ?></span>
+                </div>
+            </div>
+        </div>
 
-                <?php 
-                $delay += 0.1;
-                endwhile;
-                wp_reset_postdata();
-            else :
-                echo "<p class='text-center text-muted'>No workshops available at the moment. Check back soon!</p>";
-            endif;
+    <?php 
+    $delay += 0.1;
+    endwhile;
+    wp_reset_postdata();
+else :
+    echo "<p class='text-center text-muted'>No workshops available at the moment. Check back soon!</p>";
+endif;
             ?>
         </div>
         <div class="text-center mt-4 wow fadeInUp" data-wow-delay="0.2s">
@@ -165,7 +165,7 @@ Template Name: Home
                 ["img/hai.jpg", "Huỳnh Hải", "Marketing Director"],
                 ["img/duong.jpg", "Ánh Dương", "Tech. Director"],
                 ["img/anh.jpg", "Minh Anh", "Tech. Director"],
-                ["img/nhi.jpg", "Yến Nhi", "HR Officer"],
+                ["img/nhi.jpg", "Yến Nhi", "CSM Officer"],
             ];
             $delay = 0.1;
             foreach ($team_members as $member) : ?>
@@ -173,10 +173,6 @@ Template Name: Home
                     <div class="team-item">
                         <div class="overflow-hidden">
                             <img class="img-fluid" src="<?php echo get_template_directory_uri(); ?>/<?php echo $member[0]; ?>" alt="">
-                        </div>
-                        <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
-                            <a class="btn btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square mx-1" href="#"><i class="fab fa-instagram"></i></a>
                         </div>
                         <div class="text-center p-4">
                             <h5 class="mb-0"><?php echo $member[1]; ?></h5>
@@ -230,25 +226,3 @@ Template Name: Home
         
 
 <?php get_footer(); ?>
-
-
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-
-
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-</body>
-
-</html>

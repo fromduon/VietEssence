@@ -92,3 +92,52 @@
     
 })(jQuery);
 
+document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.getElementById("language-toggle");
+
+    // Kiểm tra nếu chưa có ngôn ngữ nào trong LocalStorage, đặt mặc định là "en"
+    if (!localStorage.getItem("language")) {
+        localStorage.setItem("language", "en");
+    }
+
+    const currentLang = localStorage.getItem("language");
+
+    // Đặt trạng thái ban đầu của toggle
+    if (currentLang === "vn") {
+        toggle.checked = true;
+        changeLanguage("vn");
+    } else {
+        toggle.checked = false;
+        changeLanguage("en");
+    }
+
+    // Sự kiện khi người dùng nhấn vào toggle
+    document.getElementById("language-switch").addEventListener("click", function () {
+        if (toggle.checked) {
+            localStorage.setItem("language", "en");
+            changeLanguage("en");
+        } else {
+            localStorage.setItem("language", "vn");
+            changeLanguage("vn");
+        }
+
+        // Reload trang để cập nhật nội dung theo ngôn ngữ đã chọn
+        setTimeout(() => {
+            location.reload();
+        }, 300);
+    });
+});
+
+function changeLanguage(lang) {
+    // Kiểm tra nếu ngôn ngữ đã được chọn, tránh reload liên tục
+    if (localStorage.getItem("language") !== lang) {
+        // Lưu ngôn ngữ vào LocalStorage
+        localStorage.setItem("language", lang);
+
+        // Lưu vào Cookie để PHP có thể sử dụng
+        document.cookie = "language=" + lang + "; path=/; max-age=" + (60 * 60 * 24 * 30);
+
+        // Chỉ reload trang nếu ngôn ngữ thực sự thay đổi
+        location.reload();
+    }
+}

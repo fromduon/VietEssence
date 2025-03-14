@@ -392,7 +392,7 @@ p {
 }
 
 .about-content {
-    padding-right: 40px; /* Tăng khoảng cách giữa chữ và ảnh */
+    padding-right: 40px;
 }
 
 .about-content h1 {
@@ -408,8 +408,8 @@ p {
 
 /* Điều chỉnh chiều cao ảnh */
 .about-image img {
-    height: 100%; /* Chiều cao bằng toàn bộ phần About Us */
-    max-height: 450px; /* Giới hạn chiều cao tối đa */
+    height: 100%;
+    max-height: 450px;
     width: auto;
     object-fit: cover;
     border-radius: 10px;
@@ -594,16 +594,16 @@ p {
 /*** Footer ***/
 
 .footer .col-lg-3 {
-    text-align: center; /* Căn giữa tiêu đề */
+    text-align: center;
 }
 
 .footer h4 {
-    text-align: center; /* Căn giữa chữ "Company", "Contact", "Newsletter" */
+    text-align: center;
 }
 
 .footer .btn-link,
 .footer p {
-    text-align: left; /* Giữ nội dung bên dưới căn trái */
+    text-align: left;
     display: block;
 }
 
@@ -713,20 +713,109 @@ p {
         transform: scale(1.1);
     }
 
-.mute-button {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 10;
+body {
+    overflow: overlay;
 }
 
-.mute-button:hover {
-    background: rgba(0, 0, 0, 0.8);
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #403c3c;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #86B817;
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #74A516;
+}
+
+.switch {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    width: 60px;
+    height: 28px;
+    background-color: #86B817;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+input.check-toggle-round-flat {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.switch label::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease-in-out;
+    z-index: 2; /* Giữ vòng tròn trên nền */
+}
+
+input.check-toggle-round-flat:checked + label::before {
+    transform: translateX(30px);
+}
+
+.switch .flag-icon {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: opacity 0.3s ease-in-out;
+    z-index: 3;
+}
+
+.switch .flag-en {
+    left: 8px;
+    opacity: 1;
+}
+
+.switch .flag-vn {
+    right: 8px;
+    opacity: 0;
+}
+
+input.check-toggle-round-flat:checked ~ .flag-en {
+    opacity: 0;
+}
+
+input.check-toggle-round-flat:checked ~ .flag-vn {
+    opacity: 1;
+}
+
+.text-center.p-4 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px; /* Có thể chỉnh theo ý muốn */
+    padding: 15px; /* Điều chỉnh padding để giảm khoảng trắng */
+}
+
+.text-muted {
+    margin-bottom: 0 !important; /* Tránh bị đẩy xuống quá xa */
+    padding-bottom: 0 !important;
+}
+
+.card.shadow-sm.border-0.h-100 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
