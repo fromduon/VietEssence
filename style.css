@@ -730,7 +730,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -830,4 +830,12 @@ input.check-toggle-round-flat:checked ~ .flag-vn {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+#workshop-filter {
+    font-family: 'Nunito', sans-serif;
+}
+
+.copyright, .footer-menu a {
+    font-family: 'Nunito', sans-serif;
 }

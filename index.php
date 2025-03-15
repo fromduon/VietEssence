@@ -67,7 +67,7 @@ if ($query->have_posts()) :
                         <img src="<?php echo esc_url($thumbnail_url); ?>" class="card-img-top img-fluid workshop-image" alt="<?php the_title(); ?>">
                     </a>
                     <span class="badge bg-danger position-absolute top-0 start-0 m-2 px-3 py-1">
-                        <?php echo esc_html($discount); ?>
+                    <?php echo esc_html($discount) . '% OFF'; ?>
                     </span>
                 </div>
                 <div class="text-center p-4">
@@ -78,7 +78,7 @@ if ($query->have_posts()) :
                 </div>
                 <div class="d-flex justify-content-around py-3 border-top">
                     <span><i class="fa fa-map-marker-alt text-primary me-2"></i><?php echo esc_html($location); ?></span>
-                    <span><i class="fa fa-clock text-primary me-2"></i><?php echo esc_html($duration); ?></span>
+                    <span><i class="fa fa-clock text-primary me-2"></i><?php echo esc_html($duration) . ' ' . ($duration == 1 ? 'hour' : 'hours'); ?> </span>
                 </div>
                 <div class="text-center pb-3">
                 <span class="fw-bold text-primary" style="font-size: 1.5rem;">$<?php echo number_format((float)$price, 2); ?></span>

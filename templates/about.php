@@ -16,7 +16,7 @@ Template Name: About
                     <h1 class="mb-4">Who We Are</h1>
                     <p class="mb-4 large-text">VietEssence is dedicated to connecting travelers with the heart of Vietnamese culture. Our workshops allow visitors to experience traditional crafts, meet skilled artisans, and gain deeper insights into Vietnam’s rich heritage.</p>
                     <p class="mb-4 large-text">Whether you're an artist, a traveler, or just curious about local traditions, we bring you closer to authentic cultural experiences.</p>
-                    <a href="<?php echo site_url('/workshop'); ?>" class="btn btn-primary">Explore Workshops</a>
+                    <a href="<?php echo site_url('/workshop'); ?>" class="btn btn-primary rounded-3">Explore Workshops</a>
                 </div>
             </div>
             <div class="col-lg-6">
